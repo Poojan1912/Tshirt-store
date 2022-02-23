@@ -6,7 +6,7 @@ const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Sandbox,
     merchantId: "hb5cwczwtd3zz6ff",
     publicKey: "nddzcmr4d2h7s935",
-    privateKey: "fb436e86b40abc7be8e8a0070176922e"
+    privateKey: process.env.PRIVATE_KEY
 });
 
 exports.getToken = (req, res) => {
@@ -30,7 +30,7 @@ exports.processPayment = (req, res) => {
             submitForSettlement: true
         }
     }, (err, result) => {
-        if(err){
+        if (err) {
             res.status(500).json(err);
         } else {
             res.send(result)
